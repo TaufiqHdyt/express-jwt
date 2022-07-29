@@ -1,0 +1,44 @@
+{
+  "name": "express-be",
+  "version": "0.1.0",
+  "author": {
+    "name": "taufiqhdyt",
+    "email": "mail@taufiqhdyt.com",
+    "url": "https://about.taufiqhdyt.com"
+  },
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start:win": "SET DEBUG=express-be:* & nodemon --expose-gc ./bin/www.js",
+    "start:dev": "DEBUG=express-be:* nodemon --expose-gc ./bin/www.js",
+    "start:prod": "node --expose-gc ./bin/www.js"
+  },
+  "imports": {
+    "#app": "./app.mjs",
+    "#src/*": "./src/*",
+    "#config/*": "./src/config/*",
+    "#helper/*": "./src/helpers/*",
+    "#module/*": "./src/modules/*",
+    "#controller/*": "./src/controllers/*"
+  },
+  "dependencies": {
+    "@prisma/client": "4.10.1",
+    "bcrypt": "^5.1.0",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "debug": "~4.3.4",
+    "express": "^5.0.0-beta.1",
+    "helmet": "^6.0.1",
+    "jsonwebtoken": "^9.0.0",
+    "morgan": "~1.10.0",
+    "multer": "^1.4.5-lts.1",
+    "yup": "^1.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20",
+    "prettier": "^2.8.4"
+  },
+  "prisma": {
+    "seed": "node prisma/seed/index.js"
+  }
+}

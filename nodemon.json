@@ -1,0 +1,6 @@
+{
+  "watch": ["app.mjs", "src"],
+  "ext": ".mjs",
+  "delay": 0,
+  "ignore": []
+}

@@ -1,0 +1,67 @@
+generator client {
+  provider        = "prisma-client-js"
+}
+
+datasource db {
+  provider        = "mysql"
+  url             = env("DATABASE_URL")
+}
+
+model User {
+  id              Int               @id @default(autoincrement())
+  name            String            @unique
+  username        String?           @unique
+  password        String?
+  lastLogin       DateTime?         @updatedAt
+
+  // Relation Fields
+  userRole        UserRole[]
+  todo            ToDo[]
+}
+
+model Role {
+  id              Int               @id @default(autoincrement())
+  name            String            @unique
+
+  // Relation Fields
+  userRole        UserRole[]
+  access          Access[]
+}
+
+model UserRole {
+  // Relation Fields
+  user            User              @relation(fields: [userName], references: [name], onDelete: Cascade, onUpdate: Cascade)
+  userName        String            @id
+  role            Role              @relation(fields: [roleName], references: [name], onDelete: Cascade, onUpdate: Cascade)
+  roleName        String
+}
+
+model Access {
+  path            String            @unique
+
+  // Relation Fields
+  role            Role              @relation(fields: [roleId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  roleId          Int
+}
+
+
+model Tag {
+  name            String            @id @unique
+
+  // Relation Fields
+  todo            ToDo[]
+}
+
+model ToDo {
+  id              Int               @id @default(autoincrement())
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  title           String
+  description     String?           @db.Text
+  completed       Boolean           @default(false)
+
+  // Relation Fields
+  user            User              @relation(fields: [username], references: [username], onDelete: Cascade, onUpdate: Cascade)
+  username        String
+  category        Tag[]
+}

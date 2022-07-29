@@ -1,0 +1,13 @@
+# system files
+.DS_Store
+
+# project files
+.idea
+node_modules/
+*.env
+*.config.json
+*.log
+
+# public files
+public/**/*.*
+!.keep
