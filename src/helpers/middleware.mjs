@@ -26,7 +26,7 @@ const userAuth = async (req, res, next) => {
     : null;
 
   if (!token) {
-    response.send(res, {
+    return response.send(res, {
       status: false,
       error: 'Not Authenticated, No Session',
     });
