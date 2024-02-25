@@ -14,25 +14,22 @@ const checkPermission = async (roleId = 6, targetUrl) => {
     },
   });
   const allowedPath = pathByRoleId?.filter(({ path }) =>
-    targetUrl.startsWith(path)
+    targetUrl.startsWith(path),
   );
   return !!allowedPath.length;
 };
 
 const userAuth = async (req, res, next) => {
-  const { headers, originalUrl } = req;
-  const token = headers?.authorization?.startsWith('Bearer')
-    ? headers?.authorization?.split(' ')[1]
-    : null;
-
-  if (!token) {
-    response.send(res, {
-      status: false,
-      error: 'Not Authenticated, No Session',
-    });
-  }
-
   try {
+    const { headers, originalUrl } = req;
+    const token = headers?.authorization?.startsWith('Bearer')
+      ? headers?.authorization?.split(' ')[1]
+      : null;
+
+    if (!token) {
+      throw new Error('Not Authenticated, No Session');
+    }
+
     const decoded = jwt.verify(token, config.jwt.secret);
 
     const isAllowed = await checkPermission(decoded.role.id, originalUrl);
