@@ -70,7 +70,7 @@ class todo {
   };
   add = async (body = {}) => {
     try {
-      const { title, description, category, user } = body;
+      const { title, description, category, user, completed } = body;
 
       await schema.validate(body);
 
@@ -78,7 +78,7 @@ class todo {
         data: {
           title,
           description,
-          completed: false,
+          completed,
           user: {
             connectOrCreate: {
               where: {
@@ -119,24 +119,40 @@ class todo {
   update = async (body = {}) => {
     try {
       const { id, title, description, completed } = body;
-
-      await schema.validate(body, { context: { update: true } });
-
+      
+      if (Object.keys(body).length === 0) {
+        return {
+          status: false,
+          error: 'Update body is empty. Provide at least one field to update.',
+        };
+      }
+      // await schema.validate(body, { context: { update: true } });
+  
+      const updateData = {};
+  
+      if (title !== undefined) {
+        updateData.title = title;
+      }
+  
+      if (description !== undefined) {
+        updateData.description = description;
+      }
+  
+      if (completed !== undefined) {
+        updateData.completed = completed;
+      }
+  
       const update = await db.toDo.update({
         where: {
           id: +id,
         },
-        data: {
-          title,
-          description,
-          completed,
-        },
+        data: updateData,
         select: {
           title: true,
           completed: true,
         },
       });
-
+  
       return {
         status: true,
         data: update,
