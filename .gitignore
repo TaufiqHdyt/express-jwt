@@ -4,6 +4,8 @@
 # project files
 .idea
 node_modules/
+!src/config/*
+src/config/index.mjs
 *.env
 *.config.json
 *.log

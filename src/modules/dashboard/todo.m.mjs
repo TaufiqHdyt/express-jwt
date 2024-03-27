@@ -1,12 +1,24 @@
 import db from '#helper/db.mjs';
-import config from '#config/app.config.json' assert { type: 'json' };
+import { config } from '#config';
 
 import { object, string, boolean } from 'yup';
 
 const schema = object({
-  title: string().label('Title').required(),
-  description: string().label('Description').required(),
-  completed: boolean().label('Completed').when(('$update', ([update], schema) => (update ? schema.required() : schema))),
+  title: string()
+    .label('Title')
+    .when(
+      ('$update', ([update], schema) => (!update ? schema.required() : schema)),
+    ),
+  description: string()
+    .label('Description')
+    .when(
+      ('$update', ([update], schema) => (!update ? schema.required() : schema)),
+    ),
+  completed: boolean()
+    .label('Completed')
+    .when(
+      ('$update', ([update], schema) => (update ? schema.required() : schema)),
+    ),
 });
 
 class todo {
@@ -30,7 +42,7 @@ class todo {
             completed,
             description,
             categoryName,
-          })
+          }),
         ),
       };
     } catch (error) {

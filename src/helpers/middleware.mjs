@@ -1,4 +1,4 @@
-import config from '#config/app.config.json' assert { type: 'json' };
+import { config } from '#config';
 import db from '#helper/db.mjs';
 import response from '#helper/response.mjs';
 

@@ -1,6 +1,6 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import config from '#config/app.config.json' assert { type: 'json' };
+import { config } from '#config';
 import multer from 'multer';
 
 import hash from '#helper/hash.mjs';
@@ -56,7 +56,7 @@ class _fileHandling {
     try {
       const { type, fileName } = req.query;
       await fs.unlink(path.join(__dirname, `/public/img/${type}/${fileName}`));
-      next()
+      next();
     } catch (error) {
       if (config.debug)
         console.error(`remove fileHandling helper error`, error);

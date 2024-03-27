@@ -1,4 +1,4 @@
-import config from '#config/app.config.json' assert { type: 'json' };
+import { config } from '#config';
 
 class Response {
   send = (res, { code, status, data, error }) => {

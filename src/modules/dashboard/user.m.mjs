@@ -1,5 +1,5 @@
 import db from '#helper/db.mjs';
-import config from '#config/app.config.json' assert { type: 'json' };
+import { config } from '#config';
 
 class _user {
   list = async (query = {}) => {
@@ -74,7 +74,10 @@ class _user {
   add = async (body = {}) => {
     try {
       const { name, role } = body;
-      const { userRole: [{ roleName }], ...addUser } = await db.user.create({
+      const {
+        userRole: [{ roleName }],
+        ...addUser
+      } = await db.user.create({
         data: {
           name,
           userRole: {
