@@ -1,5 +1,5 @@
 import db from '#helper/db.mjs';
-import config from '#config/app.config.json' assert { type: 'json' };
+import { config } from '#config';
 
 class _role {
   add = async (body = {}) => {

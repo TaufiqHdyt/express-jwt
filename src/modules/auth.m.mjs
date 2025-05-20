@@ -1,5 +1,5 @@
 import db from '#helper/db.mjs';
-import config from '#config/app.config.json' assert { type: 'json' };
+import { config } from '#config';
 
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
@@ -7,7 +7,12 @@ import jwt from 'jsonwebtoken';
 import { object, string } from 'yup';
 
 const schema = object({
-  name: string().label('Name').when(('$register', ([register], schema) => (register ? schema.required() : schema))),
+  name: string()
+    .label('Name')
+    .when(
+      ('$register',
+      ([register], schema) => (register ? schema.required() : schema)),
+    ),
   username: string().label('Username').required(),
   password: string().label('Password').required(),
   role: string().label('Password'),

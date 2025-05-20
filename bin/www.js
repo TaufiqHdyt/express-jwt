@@ -8,7 +8,7 @@ import http from 'node:http';
 import debugLib from 'debug';
 import app from '#app';
 
-import config from '#config/app.config.json' assert { type: 'json' };
+import { config } from '#config';
 
 const debug = debugLib(`${config.name}:server`);
 

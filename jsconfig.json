@@ -3,7 +3,15 @@
     "module": "NodeNext",
     "target": "ESNext",
     "moduleResolution": "nodenext",
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "paths": {
+      "#app": ["./app.mjs"],
+      "#config": ["./src/config/index.mjs"],
+      "#src/*": ["./src/*"],
+      "#helper/*": ["./src/helpers/*"],
+      "#module/*": ["./src/modules/*"],
+      "#controller/*": ["./src/controllers/*"]
+    }
   },
-  "include": ["src/**/*"]
+  "include": ["bin/*", "src/**/*"]
 }
