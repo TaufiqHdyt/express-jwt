@@ -21,8 +21,7 @@ class HASH {
     return crypto.randomBytes(length).toString(encoding);
   };
 
-  randomNumber = (length = 12) =>
-    crypto.randomInt(Math.pow(10, length - 1), Math.pow(10, length));
+  randomNumber = (length = 12) => crypto.randomInt(Math.pow(10, length - 1), Math.pow(10, length));
 }
 
 export default new HASH();

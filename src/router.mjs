@@ -6,12 +6,8 @@ const baseRoutesArray = [['auth', AuthController]];
 const apiRoutesArray = [['todo', TodoController]];
 
 const routes = (app) => {
-  baseRoutesArray.forEach(([url, controller]) =>
-    app.use(`/${url}`, controller)
-  );
-  apiRoutesArray.forEach(([url, controller]) =>
-    app.use(`/api/${url}`, controller)
-  );
+  baseRoutesArray.forEach(([url, controller]) => app.use(`/${url}`, controller));
+  apiRoutesArray.forEach(([url, controller]) => app.use(`/api/${url}`, controller));
 };
 
 export { routes };

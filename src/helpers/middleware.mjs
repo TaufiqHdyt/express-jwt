@@ -13,9 +13,7 @@ const checkPermission = async (roleId = 6, targetUrl) => {
       path: true,
     },
   });
-  const allowedPath = pathByRoleId?.filter(({ path }) =>
-    targetUrl.startsWith(path),
-  );
+  const allowedPath = pathByRoleId?.filter(({ path }) => targetUrl.startsWith(path));
   return !!allowedPath.length;
 };
 

@@ -7,11 +7,13 @@
     "url": "https://about.taufiqhdyt.com"
   },
   "private": true,
-  "type": "module",
   "scripts": {
     "dev": "node --env-file=.env --watch ./bin/www.js",
     "start": "node --env-file=.env ./bin/www.js",
-    "prisma": "prisma"
+    "format": "oxfmt",
+    "prisma": "prisma",
+    "generate": "prisma generate",
+    "seed": "prisma seed"
   },
   "imports": {
     "#app": "./app.mjs",
@@ -22,22 +24,23 @@
     "#controller/*": "./src/controllers/*"
   },
   "dependencies": {
-    "@prisma/client": "6.15.0",
+    "@prisma/adapter-mariadb": "7.9.1",
+    "@prisma/client": "7.9.1",
     "bcrypt": "^6.0.0",
     "cookie-parser": "^1.4.7",
-    "cors": "^2.8.5",
+    "cors": "^2.8.6",
     "debug": "~4.4.3",
-    "dotenv": "^17.2.3",
+    "dotenv": "^17.4.2",
     "express": "^5.2.1",
-    "helmet": "^8.1.0",
+    "helmet": "^8.3.0",
     "jsonwebtoken": "^9.0.3",
-    "morgan": "~1.10.1",
-    "multer": "2.0.2",
+    "morgan": "~1.11.0",
+    "multer": "2.2.0",
     "yup": "^1.7.1"
   },
   "devDependencies": {
-    "prettier": "^3.7.4",
-    "prisma": "^6.15.0"
+    "oxfmt": "^0.63.0",
+    "prisma": "^7.9.1"
   },
-  "packageManager": "pnpm@10.24.0+sha512.01ff8ae71b4419903b65c60fb2dc9d34cf8bb6e06d03bde112ef38f7a34d6904c424ba66bea5cdcf12890230bf39f9580473140ed9c946fef328b6e5238a345a"
+  "packageManager": "pnpm@11.21.0+sha512.521705bce689924eac72f5a3587122f362689ef6571e55ba80076fd637c11132ecffada26fad4ea79c485bfddbfd3d5a2a5b05805a77e893de71ec8a6cca3bb1"
 }

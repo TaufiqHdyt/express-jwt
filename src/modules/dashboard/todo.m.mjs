@@ -6,19 +6,13 @@ import { object, string, boolean } from 'yup';
 const schema = object({
   title: string()
     .label('Title')
-    .when(
-      ('$update', ([update], schema) => (!update ? schema.required() : schema)),
-    ),
+    .when(('$update', ([update], schema) => (!update ? schema.required() : schema))),
   description: string()
     .label('Description')
-    .when(
-      ('$update', ([update], schema) => (!update ? schema.required() : schema)),
-    ),
+    .when(('$update', ([update], schema) => (!update ? schema.required() : schema))),
   completed: boolean()
     .label('Completed')
-    .when(
-      ('$update', ([update], schema) => (update ? schema.required() : schema)),
-    ),
+    .when(('$update', ([update], schema) => (update ? schema.required() : schema))),
 });
 
 class todo {
@@ -34,16 +28,14 @@ class todo {
       });
       return {
         status: true,
-        data: todo?.map(
-          ({ id, createdAt, title, completed, description, categoryName }) => ({
-            id,
-            title,
-            createdAt,
-            completed,
-            description,
-            categoryName,
-          }),
-        ),
+        data: todo?.map(({ id, createdAt, title, completed, description, categoryName }) => ({
+          id,
+          title,
+          createdAt,
+          completed,
+          description,
+          categoryName,
+        })),
       };
     } catch (error) {
       if (config.debug) console.error(`list todo module error`, error);
@@ -131,7 +123,7 @@ class todo {
   update = async (body = {}) => {
     try {
       const { id, title, description, completed } = body;
-      
+
       if (Object.keys(body).length === 0) {
         return {
           status: false,
@@ -139,21 +131,21 @@ class todo {
         };
       }
       // await schema.validate(body, { context: { update: true } });
-  
+
       const updateData = {};
-  
+
       if (title !== undefined) {
         updateData.title = title;
       }
-  
+
       if (description !== undefined) {
         updateData.description = description;
       }
-  
+
       if (completed !== undefined) {
         updateData.completed = completed;
       }
-  
+
       const update = await db.toDo.update({
         where: {
           id: +id,
@@ -164,7 +156,7 @@ class todo {
           completed: true,
         },
       });
-  
+
       return {
         status: true,
         data: update,

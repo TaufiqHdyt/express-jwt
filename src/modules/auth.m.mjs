@@ -9,10 +9,7 @@ import { object, string } from 'yup';
 const schema = object({
   name: string()
     .label('Name')
-    .when(
-      ('$register',
-      ([register], schema) => (register ? schema.required() : schema)),
-    ),
+    .when(('$register', ([register], schema) => (register ? schema.required() : schema))),
   username: string().label('Username').required(),
   password: string().label('Password').required(),
   role: string().label('Password'),

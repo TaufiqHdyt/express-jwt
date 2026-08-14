@@ -43,8 +43,7 @@ class _fileHandling {
     try {
       return multer({ storage: storage(destName), fileFilter, limits });
     } catch (error) {
-      if (config.debug)
-        console.error(`upload fileHandling helper error`, error);
+      if (config.debug) console.error(`upload fileHandling helper error`, error);
       return {
         status: false,
         error,
@@ -58,8 +57,7 @@ class _fileHandling {
       await fs.unlink(path.join(__dirname, `/public/img/${type}/${fileName}`));
       next();
     } catch (error) {
-      if (config.debug)
-        console.error(`remove fileHandling helper error`, error);
+      if (config.debug) console.error(`remove fileHandling helper error`, error);
       return {
         status: false,
         error,

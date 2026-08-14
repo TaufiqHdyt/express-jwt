@@ -6,6 +6,7 @@
 node_modules/
 !src/config/*
 src/config/index.mjs
+/src/generated/prisma
 *.env
 *.config.json
 *.log
